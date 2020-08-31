@@ -1,0 +1,11 @@
+{
+  "name": "cs3219-otot-b",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "Aaron Choo",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "server"
+  ]
+}
