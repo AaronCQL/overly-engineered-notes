@@ -1,7 +1,7 @@
 steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/cs3219-otot-b/server', '.']
+  args: ['build', '-t', 'gcr.io/cs3219-otot-b/server', 'server/']
 # Push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/cs3219-otot-b/server']
