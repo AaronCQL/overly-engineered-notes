@@ -1,7 +1,11 @@
 steps:
+# Pull last build for caching
+- name: "gcr.io/cloud-builders/docker"
+  entrypoint: "bash"
+  args: ["-c", "docker pull gcr.io/cs3219-otot-b/server:latest || exit 0"]
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/cs3219-otot-b/server', 'server/']
+  args: ['build', '-t', 'gcr.io/cs3219-otot-b/server', '--cache-from', 'gcr.io/cs3219-otot-b/server', 'server/']
 # Push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/cs3219-otot-b/server']

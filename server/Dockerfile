@@ -4,11 +4,14 @@ FROM node:12-slim
 # create and change to app dir
 WORKDIR /usr/src/app
 
-# copy all local files; check .dockerignore for files to be ignored
-COPY . .
+# copy local package.json (to optimise build speed)
+COPY package.json ./
 
-# ignore devDeps and only install deps
+# ignore devDependencies and only install dependencies
 RUN yarn --prod
+
+# copy all local files; check .dockerignore for files that should be copied
+COPY . .
 
 # compile ts files and start the server
 CMD yarn start

@@ -1,4 +1,7 @@
-node_modules
-dist
-Dockerfile
-.dockerignore
+# ignore everything first:
+*
+
+# allow only the necessary files:
+!package.json
+!tsconfig.json
+!src/**
