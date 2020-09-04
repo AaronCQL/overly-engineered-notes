@@ -29,6 +29,24 @@ async function createNote(text: string): Promise<Note> {
   return doc;
 }
 
+async function updateNote(id: string, text: string): Promise<boolean> {
+  const collection: Collection<Note> = getDb().collection("notes");
+
+  try {
+    const objectId: ObjectId = new ObjectID(id);
+    console.log("ER");
+
+    const result = await collection.updateOne(
+      { _id: objectId },
+      { $set: { text: text, updatedAt: new Date() } }
+    );
+
+    return result.modifiedCount === 1;
+  } catch (error) {
+    return false;
+  }
+}
+
 async function deleteNote(id: string): Promise<boolean> {
   const collection: Collection<Note> = getDb().collection("notes");
 
@@ -43,4 +61,4 @@ async function deleteNote(id: string): Promise<boolean> {
   }
 }
 
-export { getNotes, createNote, deleteNote };
+export { getNotes, createNote, updateNote, deleteNote };

@@ -1,6 +1,11 @@
 import { Router, Request, Response } from "express";
 
-import { getNotes, createNote, deleteNote } from "../services/notesService";
+import {
+  getNotes,
+  createNote,
+  updateNote,
+  deleteNote,
+} from "../services/notesService";
 import Note from "../models/Note";
 
 const router: Router = Router();
@@ -27,9 +32,23 @@ router.post("/", async (req: Request, res: Response) => {
   return res.status(201).json(createdNote);
 });
 
-// PUT request - edit an existing note
-router.put("/:id", (_, res: Response) => {
-  res.status(200).send("ERROR: NOT IMPLEMENTED");
+// PUT request - update an existing note
+router.put("/:id", async (req: Request, res: Response) => {
+  const id: string = req.params.id;
+  const text: string | undefined = req.body.text;
+  if (!text) {
+    return res.status(400).send("Required field text is missing");
+  }
+
+  const trimmedText: string = text.trim();
+  if (!trimmedText) {
+    return res.status(400).send("Required field text cannot be empty string");
+  }
+
+  const isSuccessful: boolean = await updateNote(id, trimmedText);
+  return isSuccessful
+    ? res.status(204).send()
+    : res.status(404).send("Note not found");
 });
 
 // DELETE request - delete an existing note
@@ -38,7 +57,7 @@ router.delete("/:id", async (req: Request, res: Response) => {
   const isSuccessful: boolean = await deleteNote(id);
 
   return isSuccessful
-    ? res.status(204)
+    ? res.status(204).send()
     : res.status(404).send("Note not found");
 });
 
