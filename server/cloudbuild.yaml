@@ -3,6 +3,10 @@ steps:
 - name: "gcr.io/cloud-builders/docker"
   entrypoint: "bash"
   args: ["-c", "docker pull gcr.io/cs3219-otot-b/server:latest || exit 0"]
+# Generate .env from Secret Manager (for MongoDB Atlas credentials)
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: 'bash'
+  args: [ '-c', "gcloud secrets versions access latest --secret=atlas-node-env --format='get(payload.data)' | tr '_-' '/+' | base64 -d > server/.env" ]
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/cs3219-otot-b/server', '--cache-from', 'gcr.io/cs3219-otot-b/server', 'server/']
