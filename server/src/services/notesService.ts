@@ -7,8 +7,6 @@ async function getNotes(): Promise<Note[]> {
 
   const notes: Note[] = await collection.find().toArray();
 
-  console.log(`GET: ${notes.length} documents returned`);
-
   return notes;
 }
 
@@ -23,8 +21,6 @@ async function createNote(text: string): Promise<Note> {
   };
 
   await collection.insertOne(doc);
-
-  console.log(`POST: 1 document inserted (${doc._id})`);
 
   return doc;
 }
