@@ -1,11 +1,11 @@
 import MongoClient from "mongodb";
 
-const { ATLAS_USER, ATLAS_PASSWORD } = process.env;
+const { ATLAS_USER, ATLAS_PASSWORD, NODE_ENV } = process.env;
 const DB_NAME = "cs3219-otot-b-DB";
 const URI =
-  process.env.NODE_ENV === "dev"
-    ? "mongodb://localhost:27017/"
-    : `mongodb+srv://${ATLAS_USER}:${ATLAS_PASSWORD}@aaroncql.aif7w.gcp.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
+  NODE_ENV === "prod"
+    ? `mongodb+srv://${ATLAS_USER}:${ATLAS_PASSWORD}@aaroncql.aif7w.gcp.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`
+    : "mongodb://localhost:27017/";
 
 let db: MongoClient.Db;
 
@@ -14,7 +14,7 @@ async function initDb(): Promise<void> {
     useUnifiedTopology: true,
   });
   db = client.db(DB_NAME);
-  console.log("MongoDB initialised; using " + URI);
+  console.log(`MongoDB initialised: using ${NODE_ENV} database at ${URI}`);
 }
 
 function getDb(): MongoClient.Db {

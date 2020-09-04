@@ -15,5 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/notes", notesRouter);
 
 initDb().then(() => {
-  app.listen(port, () => console.log("Server started at port 8000"));
+  app.listen(port, () => {
+    console.log("Server started listening at port 8000");
+  });
 });
