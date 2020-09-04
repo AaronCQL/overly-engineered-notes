@@ -4,5 +4,8 @@ node_modules/
 # server
 server/dist
 
+# secrets
+.env
+
 # misc
 plan.md

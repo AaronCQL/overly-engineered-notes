@@ -1,3 +1,4 @@
+import "dotenv/config"; // make sure this is at the top
 import express, { Express } from "express";
 
 import notesRouter from "./routes/notes";
