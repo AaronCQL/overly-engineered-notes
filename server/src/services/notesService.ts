@@ -1,6 +1,6 @@
 import Note from "../models/Note";
 import { getDb } from "./dbService";
-import { ObjectId, Collection } from "mongodb";
+import { ObjectId, ObjectID, Collection } from "mongodb";
 
 async function getNotes(): Promise<Note[]> {
   const collection: Collection<Note> = getDb().collection("notes");
@@ -29,4 +29,18 @@ async function createNote(text: string): Promise<Note> {
   return doc;
 }
 
-export { getNotes, createNote };
+async function deleteNote(id: string): Promise<boolean> {
+  const collection: Collection<Note> = getDb().collection("notes");
+
+  try {
+    const objectId: ObjectId = new ObjectID(id);
+
+    const res = await collection.deleteOne({ _id: objectId });
+
+    return res.deletedCount === 1;
+  } catch (error) {
+    return false;
+  }
+}
+
+export { getNotes, createNote, deleteNote };
