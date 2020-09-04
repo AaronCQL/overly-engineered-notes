@@ -1,13 +1,13 @@
 import { Router, Request, Response } from "express";
 
-import { createNote } from "../services/notesService";
+import { getNotes, createNote } from "../services/notesService";
 import Note from "../models/Note";
 
 const router: Router = Router();
 
-router.get("/", (_, res: Response) => {
-  // const note: Note = getNotes();
-  res.status(200).send();
+router.get("/", async (_, res: Response) => {
+  const notes: Note[] = await getNotes();
+  res.status(200).json(notes);
 });
 
 router.post("/", async (req: Request, res: Response) => {

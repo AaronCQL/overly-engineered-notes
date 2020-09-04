@@ -1,14 +1,19 @@
 import Note from "../models/Note";
 import { getDb } from "./dbService";
-import { ObjectId } from "mongodb";
+import { ObjectId, Collection } from "mongodb";
 
-function getNotes(): Record<string, string> {
-  return { text: "ERROR NOT IMPLEMENTED" };
+async function getNotes(): Promise<Note[]> {
+  const collection: Collection<Note> = getDb().collection("notes");
+
+  const notes: Note[] = await collection.find().toArray();
+
+  console.log(`GET: ${notes.length} documents returned`);
+
+  return notes;
 }
 
 async function createNote(text: string): Promise<Note> {
-  const db = getDb();
-  const collection = db.collection("notes");
+  const collection: Collection<Note> = getDb().collection("notes");
 
   const doc: Note = {
     _id: new ObjectId(),
@@ -19,7 +24,7 @@ async function createNote(text: string): Promise<Note> {
 
   await collection.insertOne(doc);
 
-  console.log(`Doc: "${doc._id}" inserted`);
+  console.log(`POST: 1 document inserted (${doc._id})`);
 
   return doc;
 }
