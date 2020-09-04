@@ -1,9 +1,10 @@
-class Note {
-  public data: string;
+import { ObjectId } from "mongodb";
 
-  constructor() {
-    this.data = "ERROR: NOT IMPLEMENTED";
-  }
+interface Note {
+  _id: ObjectId;
+  text: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export default Note;
