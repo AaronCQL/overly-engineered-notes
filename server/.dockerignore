@@ -3,6 +3,7 @@
 
 # allow only the necessary files:
 !package.json
+!yarn.lock
 !tsconfig.json
 !src/**
 !.env

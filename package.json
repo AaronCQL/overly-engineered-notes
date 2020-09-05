@@ -1,14 +1,11 @@
 {
-  "name": "cs3219-otot-b",
-  "version": "0.1.0",
-  "main": "index.js",
+  "name": "aaroncql-cs3219-otot-b",
+  "description": "Do not install any packages here. This should only be used as a convenient way to run scripts in the root.",
   "author": "Aaron Choo",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "server"
-  ],
   "scripts": {
-    "dev": "yarn workspace server dev"
+    "install": "yarn --cwd ./server",
+    "dev": "yarn --cwd ./server dev"
   }
 }
