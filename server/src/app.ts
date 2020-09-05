@@ -16,6 +16,6 @@ app.use("/notes", notesRouter);
 
 initDb().then(() => {
   app.listen(port, () => {
-    console.log("Server started listening at port 8000");
+    console.log(`Express: started listening at port ${port}`);
   });
 });

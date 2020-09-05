@@ -10,16 +10,17 @@ const URI =
 let db: MongoClient.Db;
 
 async function initDb(): Promise<void> {
+  console.log(`MongoDB: connecting to ${NODE_ENV} database at ${URI}`);
   const client: MongoClient.MongoClient = await MongoClient.connect(URI, {
     useUnifiedTopology: true,
   });
   db = client.db(DB_NAME);
-  console.log(`MongoDB initialised: using ${NODE_ENV} database at ${URI}`);
+  console.log(`MongoDB: successfully connected`);
 }
 
 function getDb(): MongoClient.Db {
   if (db == null) {
-    throw Error("MongoDB is not yet initialised");
+    throw Error("MongoDB: not yet initialised");
   }
   return db;
 }
