@@ -5,7 +5,7 @@ FROM node:12-slim
 WORKDIR /usr/src/app
 
 # copy local package.json (to optimise build speed)
-COPY package.json ./
+COPY package.json yarn.lock ./
 
 # ignore devDependencies and only install dependencies
 RUN yarn --prod
