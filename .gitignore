@@ -3,6 +3,7 @@ node_modules/
 
 # server
 server/dist
+server/coverage
 
 # secrets
 .env

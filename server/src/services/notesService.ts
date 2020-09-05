@@ -30,7 +30,6 @@ async function updateNote(id: string, text: string): Promise<boolean> {
 
   try {
     const objectId: ObjectId = new ObjectID(id);
-    console.log("ER");
 
     const result = await collection.updateOne(
       { _id: objectId },
