@@ -7,25 +7,37 @@ const URI =
     ? `mongodb+srv://${ATLAS_USER}:${ATLAS_PASSWORD}@aaroncql.aif7w.gcp.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`
     : "mongodb://localhost:27017/";
 
-let mongoClient: MongoClient.MongoClient;
+const mongoClient: MongoClient.MongoClient = new MongoClient.MongoClient(URI, {
+  useUnifiedTopology: true,
+});
 
 async function initDb(): Promise<void> {
+  if (mongoClient.isConnected()) {
+    console.warn(`MongoDB: ${DB_NAME} already connected`);
+    return;
+  }
+
   console.log(`MongoDB: connecting to ${DB_NAME} at ${URI}`);
-  mongoClient = await MongoClient.connect(URI, {
-    useUnifiedTopology: true,
-  });
+  await mongoClient.connect();
   console.log(`MongoDB: successfully connected`);
 }
 
 function getDb(): MongoClient.Db {
-  if (mongoClient == null) {
-    throw Error("MongoDB: not yet initialised");
+  if (!mongoClient.isConnected()) {
+    throw Error("MongoDB: not yet connected");
   }
+
   return mongoClient.db(DB_NAME);
 }
 
-function closeDb(): Promise<void> {
-  return mongoClient.close();
+async function closeDb(): Promise<void> {
+  if (!mongoClient.isConnected()) {
+    console.warn(`MongoDB: already disconnected`);
+    return;
+  }
+
+  await mongoClient.close();
+  console.log("MongoDB: connection closed");
 }
 
-export { initDb, getDb, closeDb };
+export { DB_NAME, URI, initDb, getDb, closeDb };

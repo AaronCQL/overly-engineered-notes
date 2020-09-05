@@ -15,34 +15,39 @@ afterAll(async (done) => {
 });
 
 describe("GET request", () => {
-  it("should return 200 and an array of notes", async () => {
+  it("should return 200 and an array of notes", async (done) => {
     const res = await request(server).get("/notes").send();
 
     expect(Array.isArray(res.body)).toBe(true);
     expect(res.status).toEqual(200);
+    //! make sure done is called at the end: https://github.com/visionmedia/supertest/issues/520#issuecomment-456340621
+    done();
   });
 });
 
 describe("POST request", () => {
-  it("should return 400 if 'text' parameter is missing", async () => {
+  it("should return 400 if 'text' parameter is missing", async (done) => {
     const res = await request(server).post("/notes").send();
 
     expect(res.status).toEqual(400);
+    done();
   });
 
-  it("should return 400 if 'text' paramter is invalid", async () => {
+  it("should return 400 if 'text' paramter is invalid", async (done) => {
     const invalidData = { text: " " };
     const res = await request(server).post("/notes").send(invalidData);
 
     expect(res.status).toEqual(400);
+    done();
   });
 
-  it("should return 201 and the inserted data", async () => {
+  it("should return 201 and the inserted data", async (done) => {
     const validData = { text: "hello!" };
     const res = await request(server).post("/notes").send(validData);
 
     expect(res.status).toEqual(201);
     expect(res.body.text).toEqual(validData.text);
+    done();
   });
 });
 
@@ -50,28 +55,31 @@ describe("PUT request", () => {
   //* NOTE: this objectId is invalid on purpose
   const invalidObjectId = "123";
 
-  it("should return 400 if 'text' parameter is missing", async () => {
+  it("should return 400 if 'text' parameter is missing", async (done) => {
     const res = await request(server).put(`/notes/${invalidObjectId}`).send();
 
     expect(res.status).toEqual(400);
+    done();
   });
 
-  it("should return 400 if 'text' parameter is invalid", async () => {
+  it("should return 400 if 'text' parameter is invalid", async (done) => {
     const invalidData = { text: " " };
     const res = await request(server)
       .put(`/notes/${invalidObjectId}`)
       .send(invalidData);
 
     expect(res.status).toEqual(400);
+    done();
   });
 
-  it("should return 404 if document is not found", async () => {
+  it("should return 404 if document is not found", async (done) => {
     const validData = { text: "hello" };
     const res = await request(server)
       .put(`/notes/${invalidObjectId}`)
       .send(validData);
 
     expect(res.status).toEqual(404);
+    done();
   });
 });
 
@@ -79,11 +87,12 @@ describe("DELETE request", () => {
   //* NOTE: this objectId is invalid on purpose
   const invalidObjectId = "123";
 
-  it("should return 404 if document is not found", async () => {
+  it("should return 404 if document is not found", async (done) => {
     const res = await request(server)
       .delete(`/notes/${invalidObjectId}`)
       .send();
 
     expect(res.status).toEqual(404);
+    done();
   });
 });
