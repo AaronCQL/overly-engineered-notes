@@ -4,6 +4,8 @@ node_modules/
 # server
 server/dist
 server/coverage
+# mongodb-memory-server
+globalConfig.json
 
 # secrets
 .env

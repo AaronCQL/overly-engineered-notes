@@ -1,11 +1,13 @@
 import MongoClient from "mongodb";
 
-const { ATLAS_USER, ATLAS_PASSWORD, NODE_ENV } = process.env;
+const { ATLAS_USER, ATLAS_PASSWORD, NODE_ENV, MONGO_URL } = process.env;
 const DB_NAME = `cs3219-otot-a-${NODE_ENV?.toUpperCase()}`;
-const URI =
-  NODE_ENV === "prod"
+const URI: string =
+  NODE_ENV === "test"
+    ? (MONGO_URL as string) // helper env from @shelf/jest-mongodb
+    : NODE_ENV === "prod"
     ? `mongodb+srv://${ATLAS_USER}:${ATLAS_PASSWORD}@aaroncql.aif7w.gcp.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`
-    : "mongodb://localhost:27017/";
+    : `mongodb://localhost:27017/${DB_NAME}`;
 
 const mongoClient: MongoClient.MongoClient = new MongoClient.MongoClient(URI, {
   useUnifiedTopology: true,
@@ -27,7 +29,7 @@ function getDb(): MongoClient.Db {
     throw Error("MongoDB: not yet connected");
   }
 
-  return mongoClient.db(DB_NAME);
+  return mongoClient.db();
 }
 
 async function closeDb(): Promise<void> {

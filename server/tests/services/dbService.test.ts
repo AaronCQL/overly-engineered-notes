@@ -10,7 +10,7 @@ import MongoClient from "mongodb";
 describe("Database constants", () => {
   it("should be initialised to TEST environment", () => {
     expect(DB_NAME).toBe("cs3219-otot-a-TEST");
-    expect(URI).toBe("mongodb://localhost:27017/");
+    expect(URI).toBe(process.env.MONGO_URL);
   });
 });
 
