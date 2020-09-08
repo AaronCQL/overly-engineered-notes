@@ -71,6 +71,7 @@ If there are any errors while connecting to your local MongoDB server, ensure th
 
 1. Verify that the server has started and is listening on `http://localhost:8000`
 2. Using Postman (or `curl`), make a `GET` call to `http://localhost:8000/api/notes` to verify that the endpoint is working
+3. Refer to the [API reference](#api-reference) for the other endpoints
 
 #### Lint and run tests
 
@@ -140,7 +141,7 @@ The following base URLs are assumed:
 - Method: `POST`
 - URL: `/api/notes`
 - Body data (example):
-  ```json
+  ```js
   {
     "text": "hello" // string; required!
   }
@@ -151,7 +152,7 @@ The following base URLs are assumed:
 - Condition: if everything is OK and `text` field is not missing nor an empty string
 - Code: `201 CREATED`
 - Content (example):
-  ```json
+  ```js
   {
     "_id": "5f570273a83adf5417b48026",
     "text": "hello",
@@ -176,7 +177,7 @@ The following base URLs are assumed:
 - Condition: if everything is OK
 - Code: `200 CREATED OK`
 - Content (example):
-  ```json
+  ```js
   [
     // ...
     {
@@ -196,7 +197,7 @@ The following base URLs are assumed:
 - URL parameters
   - `id`: the `ObjectId` of the MongoDB document
 - Body data (example):
-  ```json
+  ```js
   {
     "text": "updated" // string; required!
   }
