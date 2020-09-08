@@ -17,4 +17,5 @@ jobs:
       run: yarn ci:server
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
-      directory: ./server/coverage
+      with:
+        directory: ./server/coverage
