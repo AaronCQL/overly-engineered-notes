@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "lint": "eslint src/* tests/*",
-    "test": "cross-env NODE_ENV=test jest --coverage",
+    "test": "cross-env NODE_ENV=test jest --ci --coverage",
     "ci": "yarn lint && yarn test",
     "start": "tsc -p tsconfig.build.json && cross-env NODE_ENV=prod node dist/index.js",
     "dev": "tsc-watch -p tsconfig.build.json --onSuccess 'cross-env NODE_ENV=dev node dist/index.js'"

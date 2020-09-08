@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "install": "yarn --cwd ./server",
-    "dev": "yarn --cwd ./server dev"
+    "dev": "yarn --cwd ./server dev",
+    "ci:server": "yarn --cwd ./server ci"
   }
 }
