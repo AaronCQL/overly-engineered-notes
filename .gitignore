@@ -12,3 +12,6 @@ globalConfig.json
 
 # misc
 plan.md
+
+# client
+client/dist
