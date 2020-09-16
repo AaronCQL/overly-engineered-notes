@@ -1,4 +1,4 @@
-import { DB_NAME } from "../src/services/dbService";
+import { DB_NAME } from "../src/services/database";
 
 describe("process.env environment variables", () => {
   it("should be set to TEST environment", () => {

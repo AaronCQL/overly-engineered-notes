@@ -5,7 +5,7 @@ import {
   createNote,
   updateNote,
   deleteNote,
-} from "../services/notesService";
+} from "../controllers/notes";
 import Note from "../models/Note";
 
 const router: Router = Router();

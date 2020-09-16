@@ -1,5 +1,5 @@
 import Note from "../models/Note";
-import { getDb } from "./dbService";
+import { getDb } from "../services/database";
 import { ObjectId, ObjectID, Collection } from "mongodb";
 
 async function getNotes(): Promise<Note[]> {

@@ -1,6 +1,6 @@
 import request from "supertest";
-import server from "../../src/services/serverService";
-import { initDb, closeDb } from "../../src/services/dbService";
+import server from "../../src/services/server";
+import { initDb, closeDb } from "../../src/services/database";
 
 const API_ENDPOINT = "/api/notes";
 

@@ -4,7 +4,7 @@ import {
   initDb,
   closeDb,
   getDb,
-} from "../../src/services/dbService";
+} from "../../src/services/database";
 import MongoClient from "mongodb";
 
 describe("Database constants", () => {

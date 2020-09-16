@@ -7,7 +7,7 @@ module.exports = {
     },
     autoStart: false,
     instance: {
-      dbName: require("./src/services/dbService").DB_NAME,
+      dbName: require("./src/services/database").DB_NAME,
     },
   },
 };

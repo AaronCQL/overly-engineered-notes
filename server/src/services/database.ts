@@ -2,12 +2,14 @@ import MongoClient from "mongodb";
 
 const { ATLAS_USER, ATLAS_PASSWORD, NODE_ENV, MONGO_URL } = process.env;
 const DB_NAME = `cs3219-otot-b-${NODE_ENV?.toUpperCase()}`;
+const PROD_DB_URL = `mongodb+srv://${ATLAS_USER}:${ATLAS_PASSWORD}@aaroncql.aif7w.gcp.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
+const DEV_DB_URL = `mongodb://localhost:27017/${DB_NAME}`;
 const URI: string =
   NODE_ENV === "test"
     ? (MONGO_URL as string) // helper env from @shelf/jest-mongodb
     : NODE_ENV === "prod"
-    ? `mongodb+srv://${ATLAS_USER}:${ATLAS_PASSWORD}@aaroncql.aif7w.gcp.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`
-    : `mongodb://localhost:27017/${DB_NAME}`;
+    ? PROD_DB_URL
+    : DEV_DB_URL;
 
 const mongoClient: MongoClient.MongoClient = new MongoClient.MongoClient(URI, {
   useUnifiedTopology: true,
