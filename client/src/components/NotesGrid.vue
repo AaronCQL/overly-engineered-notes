@@ -8,8 +8,6 @@
 </template>
 
 <script lang="ts">
-import { reactive, computed } from "vue";
-
 import NoteCard from "./NoteCard.vue";
 import AddNoteButton from "./AddNoteButton.vue";
 import { getNotes } from "./../utils/api";

@@ -11,4 +11,8 @@ async function getNotes() {
   return notes;
 }
 
-export { getNotes };
+async function createNote(text: string) {
+  await axios.post(API.CREATE_NOTE, { text: text });
+}
+
+export { getNotes, createNote };
