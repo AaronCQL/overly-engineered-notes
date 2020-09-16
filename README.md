@@ -63,7 +63,7 @@ yarn dev
 While developing locally, the local MongoDB server is used:
 
 - URL: `mongodb://localhost:27017`
-- Database name: `cs3219-otot-a-DEV`
+- Database name: `cs3219-otot-b-DEV`
 
 If there are any errors while connecting to your local MongoDB server, ensure that it is actually running first, or use a GUI like [MongoDB Compass](https://www.mongodb.com/products/compass) to verify that you are able to connect to the above URL.
 

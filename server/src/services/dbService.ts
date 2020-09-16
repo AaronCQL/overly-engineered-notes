@@ -1,7 +1,7 @@
 import MongoClient from "mongodb";
 
 const { ATLAS_USER, ATLAS_PASSWORD, NODE_ENV, MONGO_URL } = process.env;
-const DB_NAME = `cs3219-otot-a-${NODE_ENV?.toUpperCase()}`;
+const DB_NAME = `cs3219-otot-b-${NODE_ENV?.toUpperCase()}`;
 const URI: string =
   NODE_ENV === "test"
     ? (MONGO_URL as string) // helper env from @shelf/jest-mongodb
