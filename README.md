@@ -1,8 +1,8 @@
 <!-- omit in toc -->
-# CS3219 OTOT Task B
+# Overly Engineered Notes
 
-![GitHub CI](https://github.com/AaronCQL/CS3219-OTOT-B/workflows/Server%20CI%20Tests/badge.svg)
-![Codecov](https://img.shields.io/codecov/c/github/AaronCQL/CS3219-OTOT-B)
+![GitHub CI](https://github.com/AaronCQL/overly-engineered-notes/workflows/Server%20CI%20Tests/badge.svg)
+![Codecov](https://img.shields.io/codecov/c/github/AaronCQL/overly-engineered-notes)
 ![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)
 
 - [Server](#server)
@@ -63,7 +63,7 @@ yarn dev
 While developing locally, the local MongoDB server is used:
 
 - URL: `mongodb://localhost:27017`
-- Database name: `cs3219-otot-b-DEV`
+- Database name: `overly-engineered-notes-DEV`
 
 If there are any errors while connecting to your local MongoDB server, ensure that it is actually running first, or use a GUI like [MongoDB Compass](https://www.mongodb.com/products/compass) to verify that you are able to connect to the above URL.
 
@@ -133,7 +133,7 @@ Google Cloud Build is responsible for the Continuous Deployment (CD). Only chang
 
 The following base URLs are assumed:
 
-- **Deployed endpoint**: https://cs3219-otot-b-server-reeh2u5ugq-as.a.run.app
+- **Deployed endpoint**: https://overly-engineered-notes-server-reeh2u5ugq-as.a.run.app
 - **Local endpoint**: http://localhost:8000
 
 #### Create a note

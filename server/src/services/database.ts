@@ -1,7 +1,7 @@
 import MongoClient from "mongodb";
 
 const { ATLAS_USER, ATLAS_PASSWORD, NODE_ENV, MONGO_URL } = process.env;
-const DB_NAME = `cs3219-otot-b-${NODE_ENV?.toUpperCase()}`;
+const DB_NAME = `overly-engineered-notes-${NODE_ENV?.toUpperCase()}`;
 const PROD_DB_URL = `mongodb+srv://${ATLAS_USER}:${ATLAS_PASSWORD}@aaroncql.aif7w.gcp.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
 const DEV_DB_URL = `mongodb://localhost:27017/${DB_NAME}`;
 const URI: string =

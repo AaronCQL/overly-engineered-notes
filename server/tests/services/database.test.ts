@@ -9,7 +9,7 @@ import MongoClient from "mongodb";
 
 describe("Database constants", () => {
   it("should be initialised to TEST environment", () => {
-    expect(DB_NAME).toBe("cs3219-otot-b-TEST");
+    expect(DB_NAME).toBe("overly-engineered-notes-TEST");
     expect(URI).toBe(process.env.MONGO_URL);
   });
 });

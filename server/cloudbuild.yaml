@@ -16,6 +16,6 @@ steps:
 # Deploy container image to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
-  args: ['run', 'deploy', 'cs3219-otot-b-server', '--image', 'gcr.io/cs3219-otot-b/server', '--region', 'asia-southeast1', '--platform', 'managed', '--allow-unauthenticated']
+  args: ['run', 'deploy', 'overly-engineered-notes-server', '--image', 'gcr.io/cs3219-otot-b/server', '--region', 'asia-southeast1', '--platform', 'managed', '--allow-unauthenticated']
 images:
 - gcr.io/cs3219-otot-b/server

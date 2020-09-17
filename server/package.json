@@ -1,5 +1,5 @@
 {
-  "name": "@aaroncql-cs3219-otot-b/server",
+  "name": "@overly-engineered-notes/server",
   "version": "0.1.0",
   "main": "src/app.ts",
   "author": "Aaron Choo",
