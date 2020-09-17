@@ -2,6 +2,7 @@
   <div
     class="h-full grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-rows-3 gap-4"
   >
+    <AddNoteButton @note-created="refreshNotes" />
     <NoteCard
       v-for="note in notes"
       :key="note._id"
@@ -10,10 +11,6 @@
       @note-edited="refreshNotes"
     />
   </div>
-  <AddNoteButton
-    class="fixed right-0 bottom-0 m-6"
-    @note-created="refreshNotes"
-  />
 </template>
 
 <script lang="ts">
@@ -34,7 +31,8 @@ export default defineComponent({
     const notes: Ref<Note[]> = ref([]);
 
     async function refreshNotes() {
-      notes.value = await getNotes();
+      // reverse to get the newest notes first
+      notes.value = (await getNotes()).reverse();
     }
 
     onMounted(async () => {

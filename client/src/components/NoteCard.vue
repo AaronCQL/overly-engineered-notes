@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-gray-800 text-gray-100 p-2 shadow-md hover:shadow-lg rounded-md flex flex-col justify-between"
+    class="bg-gray-800 text-gray-100 p-2 shadow hover:shadow-lg rounded-md flex flex-col justify-between transition duration-100"
   >
     <div class="mb-4">
       <div class="font-light mb-2 text-gray-400">
@@ -20,7 +20,7 @@
 
       <div>
         <button
-          class="focus:outline-none text-blue-500 hover:text-blue-300 p-2"
+          class="focus:outline-none text-blue-500 hover:text-blue-300 p-2 transition duration-100"
           @click="onEditButtonClick"
         >
           <svg
@@ -40,7 +40,7 @@
         </button>
 
         <button
-          class="focus:outline-none text-red-500 hover:text-red-300 p-2"
+          class="focus:outline-none text-red-500 hover:text-red-300 p-2 transition duration-100"
           @click="onDeleteButtonClick"
         >
           <svg
