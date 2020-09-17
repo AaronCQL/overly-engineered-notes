@@ -1,6 +1,6 @@
 const ENDPOINT: string =
   process.env.NODE_ENV === "production"
-    ? "https://overly-engineered-notes-server-reeh2u5ugq-as.a.run.app"
+    ? "https://overly-engineered-notes-server-reeh2u5ugq-as.a.run.app/api"
     : "http://localhost:8000/api";
 
 const API = Object.freeze({
