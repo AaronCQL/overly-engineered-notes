@@ -12,9 +12,9 @@ jobs:
       with:
         node-version: '12.x'
     - name: Install dependencies
-      run: yarn
+      run: yarn --cwd ./server install
     - name: Test and generate coverage
-      run: yarn ci:server
+      run: yarn --cwd ./server ci
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
