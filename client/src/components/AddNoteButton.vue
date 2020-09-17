@@ -22,18 +22,20 @@
 
 <script lang="ts">
 import { createNote } from "../utils/api";
+
 function getUserInput(): string {
-  const userInput: string = prompt("Enter your note");
+  const userInput: string = prompt("Enter your new note:");
+
+  return userInput?.trim();
+}
+
+async function onAddButtonClick(): Promise<void> {
+  const userInput: string = getUserInput();
 
   if (!userInput) {
     return;
   }
 
-  return userInput;
-}
-
-async function onAddButtonClick() {
-  const userInput: string = getUserInput();
   await createNote(userInput);
 }
 
