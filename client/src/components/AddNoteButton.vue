@@ -29,19 +29,21 @@ function getUserInput(): string {
   return userInput?.trim();
 }
 
-async function onAddButtonClick(): Promise<void> {
-  const userInput: string = getUserInput();
-
-  if (!userInput) {
-    return;
-  }
-
-  await createNote(userInput);
-}
-
 export default {
   name: "AddNoteButton",
-  setup() {
+  emits: ["note-created"],
+  setup(_, { emit }) {
+    async function onAddButtonClick() {
+      const userInput: string = getUserInput();
+
+      if (!userInput) {
+        return;
+      }
+
+      await createNote(userInput);
+      emit("note-created");
+    }
+
     return {
       onAddButtonClick,
     };

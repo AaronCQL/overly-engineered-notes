@@ -21,6 +21,7 @@
       <div>
         <button
           class="focus:outline-none text-blue-500 hover:text-blue-300 p-2"
+          @click="onEditButtonClick"
         >
           <svg
             class="w-6 h-6"
@@ -38,7 +39,10 @@
           </svg>
         </button>
 
-        <button class="focus:outline-none text-red-500 hover:text-red-300 p-2">
+        <button
+          class="focus:outline-none text-red-500 hover:text-red-300 p-2"
+          @click="onDeleteButtonClick"
+        >
           <svg
             class="w-6 h-6"
             fill="none"
@@ -63,6 +67,13 @@
 import { computed } from "vue";
 
 import { Note } from "../utils/models";
+import { deleteNote, editNote } from "../utils/api";
+
+function getUserInput(currentText: string): string {
+  const userInput: string = prompt("Enter your new note:", currentText);
+
+  return userInput?.trim();
+}
 
 export default {
   name: "NoteCard",
@@ -72,13 +83,40 @@ export default {
       required: true,
     },
   },
-  setup(props) {
+  emits: ["note-deleted", "note-edited"],
+  setup(props, { emit }) {
     const formattedCreatedAt = computed(() =>
       new Date(props.note.createdAt).toLocaleString()
     );
 
+    async function onDeleteButtonClick() {
+      const shouldProceed: boolean = confirm(
+        "Are you sure you want delete this note? This cannot be undone."
+      );
+
+      if (!shouldProceed) {
+        return;
+      }
+
+      await deleteNote(props.note._id);
+      emit("note-deleted");
+    }
+
+    async function onEditButtonClick() {
+      const userInput: string = getUserInput(props.note.text);
+
+      if (!userInput) {
+        return;
+      }
+
+      await editNote(props.note._id, userInput);
+      emit("note-edited");
+    }
+
     return {
       formattedCreatedAt,
+      onEditButtonClick,
+      onDeleteButtonClick,
     };
   },
 };

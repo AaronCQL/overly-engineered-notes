@@ -2,12 +2,23 @@
   <div
     class="h-full grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-rows-3 gap-4"
   >
-    <NoteCard v-for="note in notes" :key="note._id" :note="note" />
+    <NoteCard
+      v-for="note in notes"
+      :key="note._id"
+      :note="note"
+      @note-deleted="refreshNotes"
+      @note-edited="refreshNotes"
+    />
   </div>
-  <AddNoteButton class="fixed right-0 bottom-0 m-6" />
+  <AddNoteButton
+    class="fixed right-0 bottom-0 m-6"
+    @note-created="refreshNotes"
+  />
 </template>
 
 <script lang="ts">
+import { onMounted, ref, Ref } from "vue";
+
 import NoteCard from "./NoteCard.vue";
 import AddNoteButton from "./AddNoteButton.vue";
 import { getNotes } from "./../utils/api";
@@ -20,10 +31,19 @@ export default {
     AddNoteButton,
   },
   async setup() {
-    const notes: Note[] = await getNotes();
+    const notes: Ref<Note[]> = ref([]);
+
+    async function refreshNotes() {
+      notes.value = await getNotes();
+    }
+
+    onMounted(async () => {
+      await refreshNotes();
+    });
 
     return {
       notes,
+      refreshNotes,
     };
   },
 };
