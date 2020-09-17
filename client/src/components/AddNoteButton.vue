@@ -21,6 +21,7 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import { createNote } from "../utils/api";
 
 function getUserInput(): string {
@@ -29,7 +30,7 @@ function getUserInput(): string {
   return userInput?.trim();
 }
 
-export default {
+export default defineComponent({
   name: "AddNoteButton",
   emits: ["note-created"],
   setup(_, { emit }) {
@@ -48,7 +49,7 @@ export default {
       onAddButtonClick,
     };
   },
-};
+});
 </script>
 
 <style></style>

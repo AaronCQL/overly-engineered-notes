@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { computed } from "vue";
+import { computed, defineComponent } from "vue";
 
 import { Note } from "../utils/models";
 import { deleteNote, editNote } from "../utils/api";
@@ -75,7 +75,7 @@ function getUserInput(currentText: string): string {
   return userInput?.trim();
 }
 
-export default {
+export default defineComponent({
   name: "NoteCard",
   props: {
     note: {
@@ -119,7 +119,7 @@ export default {
       onDeleteButtonClick,
     };
   },
-};
+});
 </script>
 
 <style></style>

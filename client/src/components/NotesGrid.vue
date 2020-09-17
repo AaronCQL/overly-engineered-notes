@@ -17,14 +17,14 @@
 </template>
 
 <script lang="ts">
-import { onMounted, ref, Ref } from "vue";
+import { defineComponent, onMounted, ref, Ref } from "vue";
 
 import NoteCard from "./NoteCard.vue";
 import AddNoteButton from "./AddNoteButton.vue";
 import { getNotes } from "./../utils/api";
 import { Note } from "../utils/models";
 
-export default {
+export default defineComponent({
   name: "NotesGrid",
   components: {
     NoteCard,
@@ -46,7 +46,7 @@ export default {
       refreshNotes,
     };
   },
-};
+});
 </script>
 
 <style></style>
