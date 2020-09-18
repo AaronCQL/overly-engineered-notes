@@ -5,9 +5,19 @@
 ![Codecov](https://img.shields.io/codecov/c/github/AaronCQL/overly-engineered-notes)
 ![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)
 
-- [Server](#server)
+A serverless MEVN stack [website](https://overly-engineered-notes.vercel.app/) built using multiple cloud services (GCP/Vercel/GitHub Actions), and with automated CI/CD integration.
+
+<!-- omit in toc -->
+## TOC
+
+- [Client](#client)
   - [Tech stack](#tech-stack)
-  - [Installation](#installation)
+  - [Installing](#installing)
+  - [Developing](#developing)
+  - [Deploying](#deploying)
+- [Server](#server)
+  - [Tech stack](#tech-stack-1)
+  - [Installing](#installing-1)
   - [Development environment](#development-environment)
     - [Start developing](#start-developing)
     - [Access local endpoints](#access-local-endpoints)
@@ -15,26 +25,73 @@
   - [Production environment](#production-environment)
     - [Connect to MongoDB Atlas production server](#connect-to-mongodb-atlas-production-server)
     - [Manually deploy via Google Cloud Build](#manually-deploy-via-google-cloud-build)
-  - [Continuous Integration & Continuous Deployment](#continuous-integration--continuous-deployment)
+  - [Continuous Integration](#continuous-integration)
+  - [Continuous Deployment](#continuous-deployment)
   - [API reference](#api-reference)
     - [Create a note](#create-a-note)
     - [Get all notes](#get-all-notes)
     - [Update a note](#update-a-note)
     - [Delete a note](#delete-a-note)
 
+## Client
+
+### Tech stack
+
+- **Vue 3**: frontend framework (with the new composition API)
+- **Vite**: bundler and build tool
+- **Tailwind CSS**: utility-first CSS framework
+- **Vercel**: hosting and continuous deployments
+- **TypeScript**: main programming language
+
+### Installing
+
+To install the client dependencies, run:
+
+```sh
+# change to client/ directory first
+cd client/
+# install all dependencies
+yarn
+```
+
+### Developing
+
+Make sure the [development server is started first](#start-developing). Then,
+
+```sh
+# change to client/ directory first
+cd client/
+# start developing with hot reload
+yarn dev
+```
+
+While developing locally, the local MongoDB server is used:
+
+- URL: `mongodb://localhost:27017`
+- Database name: `overly-engineered-notes-DEV`
+
+### Deploying
+
+This project is configured with the [Vercel GitHub Integration](https://vercel.com/github):
+
+- Pushes to the `master` branch will be automatically deployed to production
+- PRs will be deployed to a separate test environment
+
 ## Server
 
 ### Tech stack
 
 - **Google Cloud Build**: CD workflow to build the docker images
-- **Google Cloud Run**: where the serverless container is deployed
+- **Google Cloud Run**: where the serverless containers are deployed
 - **Google Container Registry**: where the docker images are stored
 - **Google Secret Manager**: where secrets are stored (MongoDB Atlas credentials in this case)
+- **Docker**: to create the containers needed for Cloud Run
 - **MongoDB**: choice of database
-- **GitHub Actions**: CI workflow to generate and upload code coverage
-- **Codecov**: where the code coverage is uploaded to
+- **GitHub Actions**: CI workflow to automate tests and lint code
+- **Codecov**: where the code coverage is hosted
+- **TypeScript**: main programming language
 
-### Installation
+### Installing
 
 Install a local copy of [MongoDB](https://www.mongodb.com/) if you want to develop locally.
 
@@ -117,9 +174,11 @@ To start a manual deployment to production, also ensure that the `server/.env` f
 gcloud builds submit --config server/cloudbuild.yaml
 ```
 
-### Continuous Integration & Continuous Deployment
+### Continuous Integration
 
-GitHub Actions is responsible for the Continuous Integration (CI). Refer to the workflow at `.github/workflows/server-ci.yml`. Any changes in the `master` branch will trigger this workflow to run. The generated code coverage report is also automatically uploaded to [Codecov](https://codecov.io/).
+GitHub Actions is responsible for the Continuous Integration (CI). Refer to the workflow at `.github/workflows/server-ci.yml`. Any changes in the `master` branch will trigger this workflow to run. The generated code coverage report will also be automatically uploaded to [Codecov](https://codecov.io/).
+
+### Continuous Deployment
 
 Google Cloud Build is responsible for the Continuous Deployment (CD). Only changes in the `master` branch *and* within the `server/` directory will trigger this workflow to run. Refer to the build configuration at `server/cloudbuild.yaml`. The current workflow will:
 
