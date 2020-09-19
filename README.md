@@ -40,7 +40,7 @@ A serverless MEVN stack [website](https://overly-engineered-notes.vercel.app/) b
 - **Vue 3**: frontend framework (with the new composition API)
 - **Vite**: bundler and build tool
 - **Tailwind CSS**: utility-first CSS framework
-- **Vercel**: hosting and continuous deployments
+- **Vercel**: hosting and CD
 - **TypeScript**: main programming language
 
 ### Installing
@@ -87,8 +87,10 @@ This project is configured with the [Vercel GitHub Integration](https://vercel.c
 - **Google Secret Manager**: where secrets are stored (MongoDB Atlas credentials in this case)
 - **Docker**: to create the containers needed for Cloud Run
 - **MongoDB**: choice of database
-- **GitHub Actions**: CI workflow to automate tests and lint code
+- **Jest**: testing framework
+- **GitHub Actions**: CI workflow to automate linting and testing
 - **Codecov**: where the code coverage is hosted
+- **Node.js**: server runtime environment
 - **TypeScript**: main programming language
 
 ### Installing
@@ -132,14 +134,20 @@ If there are any errors while connecting to your local MongoDB server, ensure th
 
 #### Lint and run tests
 
+[ESLint](https://eslint.org/) with the [Prettier plugin](https://prettier.io/) is used to lint the source code, while [Jest](https://jestjs.io/) is used as the testing framework. To lint and run all tests:
+
 ```sh
 # change to server/ directory first
 cd server/
 # lint and run all tests
-yarn ci
+yarn ci # similar to "yarn lint && yarn test"
+# to only run lint
+yarn lint
+# to only run tests
+yarn test
 ```
 
-While running tests (`yarn ci`), an in-memory version of MongoDB is used (see [`@shelf/jest-mongodb`](https://github.com/shelfio/jest-mongodb)). All reads and writes are performed using an ephemeral database which will not persist beyond the tests.
+While running tests (`yarn test`), an in-memory version of MongoDB is used (see [`@shelf/jest-mongodb`](https://github.com/shelfio/jest-mongodb)). All reads and writes are performed using an ephemeral database which will not persist beyond the tests.
 
 ### Production environment
 
@@ -161,32 +169,32 @@ Then, start the server:
 # change to server/ directory first
 cd server/
 # start server (without hot reload) and connect to production MongoDB Atlas
-# this is the command used when deployed to Cloud Run
+# this is the command used when deploying to Cloud Run
 yarn start
 ```
 
 #### Manually deploy via Google Cloud Build
 
-To start a manual deployment to production, also ensure that the `server/.env` file contains the required environment variables like above. Then, ensure you are at the root of the project and run:
+To start a manual deployment to production, first ensure that the `server/.env` file contains the required environment variables for the production MongoDB Atlas server. Then, **ensure you are at the root of the project** and run:
 
 ```sh
-# run in root of project (ie. BEFORE the server/ dir)
+# run in root of project (ie. OUTSIDE the server/ dir)
 gcloud builds submit --config server/cloudbuild.yaml
 ```
 
 ### Continuous Integration
 
-GitHub Actions is responsible for the Continuous Integration (CI). Refer to the workflow at `.github/workflows/server-ci.yml`. Any changes in the `master` branch will trigger this workflow to run. The generated code coverage report will also be automatically uploaded to [Codecov](https://codecov.io/).
+GitHub Actions is responsible for the Continuous Integration (CI). The `yarn ci` command will be run in the `server/` directory to lint and run all tests. Refer to the workflow in [`.github/workflows/server-ci.yml`](https://github.com/AaronCQL/overly-engineered-notes/blob/master/.github/workflows/server-ci.yml) for more information. Any changes in the `master` branch will trigger this workflow to run. The generated code coverage report will also be automatically uploaded to [Codecov](https://codecov.io/).
 
 ### Continuous Deployment
 
-Google Cloud Build is responsible for the Continuous Deployment (CD). Only changes in the `master` branch *and* within the `server/` directory will trigger this workflow to run. Refer to the build configuration at `server/cloudbuild.yaml`. The current workflow will:
+Google Cloud Build is responsible for the Continuous Deployment (CD). Only changes in the `master` branch *and* within the `server/` directory will trigger this workflow to run. Refer to the Cloud Build configuration in [`server/cloudbuild.yaml`](https://github.com/AaronCQL/overly-engineered-notes/blob/master/server/cloudbuild.yaml) - the current workflow will:
 
-1. Pull the last image in Container Registry to use as cache
+1. Pull the last Docker image in Container Registry to use as cache
 2. Generate the `.env` file from Secret Manager needed for MongoDB Atlas credentials
-3. Build the new docker image as configured in `server/Dockerfile`
-4. Push the new image to Container Registry
-5. Deploy the new image to Cloud Run as a serverless container
+3. Build the new Docker image as configured in [`server/Dockerfile`](https://github.com/AaronCQL/overly-engineered-notes/blob/master/server/Dockerfile)
+4. Push the new Docker image to Container Registry
+5. Deploy the new Docker image to Cloud Run as a serverless container
 
 ### API reference
 

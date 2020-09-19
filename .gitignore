@@ -11,7 +11,7 @@ globalConfig.json
 .env
 
 # misc
-plan.md
+misc/
 
 # client
 client/dist
