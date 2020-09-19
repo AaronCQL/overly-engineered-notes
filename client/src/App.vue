@@ -1,14 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-900 p-4">
-    <Suspense>
-      <template #default>
-        <NotesGrid />
-      </template>
-      <template #fallback>
-        <div>LOADING</div>
-      </template>
-    </Suspense>
-  </div>
+  <NotesGrid />
 </template>
 
 <script>

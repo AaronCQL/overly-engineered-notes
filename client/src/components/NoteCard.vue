@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-gray-800 text-gray-100 p-2 shadow hover:shadow-lg rounded-md flex flex-col justify-between transition duration-100"
+    class="bg-gray-800 text-gray-100 p-3 shadow hover:shadow-lg rounded-md flex flex-col justify-between transition duration-100"
   >
     <div class="mb-4">
       <div class="font-light mb-2 text-gray-400">
@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="flex justify-between items-end -mb-2 -mx-2">
+    <div class="flex justify-between items-end -mb-3 -mx-3">
       <span
         class="text-gray-600 text-sm bg-opacity-25 px-1 font-mono rounded-bl"
       >

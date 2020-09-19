@@ -1,9 +1,9 @@
 <template>
   <button
-    class="bg-green-600 bg-opacity-25 hover:bg-opacity-50 text-green-200 shadow hover:shadow-lg rounded-md focus:outline-none flex justify-center items-center transition duration-100"
+    class="bg-green-600 bg-opacity-25 hover:bg-opacity-50 text-green-300 shadow hover:shadow-lg rounded-md focus:outline-none flex justify-center items-center transition duration-100"
     @click="onAddButtonClick"
   >
-    <span class="text-xl uppercase font-semibold tracking-wide">Add Note</span>
+    <span class="text-xl uppercase font-bold tracking-wider">Add Note</span>
     <svg
       class="w-8 h-8"
       fill="none"
@@ -14,7 +14,7 @@
       <path
         stroke-linecap="round"
         stroke-linejoin="round"
-        stroke-width="1.7"
+        stroke-width="2"
         d="M12 6v6m0 0v6m0-6h6m-6 0H6"
       ></path>
     </svg>
