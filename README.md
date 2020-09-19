@@ -65,6 +65,8 @@ cd client/
 yarn dev
 ```
 
+Then, head to http://localhost:3000 to view the website.
+
 While developing locally, the local MongoDB server is used:
 
 - URL: `mongodb://localhost:27017`
