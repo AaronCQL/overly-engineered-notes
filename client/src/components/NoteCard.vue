@@ -109,6 +109,10 @@ export default defineComponent({
         return;
       }
 
+      if (userInput === props.note.text) {
+        return;
+      }
+
       await editNote(props.note._id, userInput);
       emit("note-edited");
     }
