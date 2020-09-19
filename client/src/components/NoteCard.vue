@@ -20,6 +20,7 @@
 
       <div>
         <button
+          aria-label="Edit note"
           class="focus:outline-none text-blue-500 hover:text-blue-300 p-2 transition duration-100"
           @click="onEditButtonClick"
         >
@@ -40,6 +41,7 @@
         </button>
 
         <button
+          aria-label="Delete note"
           class="focus:outline-none text-red-500 hover:text-red-300 p-2 transition duration-100"
           @click="onDeleteButtonClick"
         >

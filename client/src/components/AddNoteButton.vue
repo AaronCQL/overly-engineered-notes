@@ -1,6 +1,7 @@
 <template>
   <button
     class="bg-green-600 bg-opacity-25 hover:bg-opacity-50 text-green-300 shadow hover:shadow-lg rounded-md focus:outline-none flex justify-center items-center transition duration-100"
+    aria-label="Add note"
     @click="onAddButtonClick"
   >
     <span class="text-xl uppercase font-bold tracking-wider">Add Note</span>
