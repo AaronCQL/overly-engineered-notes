@@ -244,7 +244,7 @@ The following base URLs are assumed:
 **Success response**:
 
 - Condition: if everything is OK
-- Code: `200 CREATED OK`
+- Code: `200 OK`
 - Content (example):
   ```js
   [
