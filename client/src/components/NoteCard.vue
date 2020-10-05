@@ -108,6 +108,7 @@ export default defineComponent({
       const userInput: string = getUserInput(props.note.text);
 
       if (!userInput) {
+        alert("Notes cannot be empty.");
         return;
       }
 

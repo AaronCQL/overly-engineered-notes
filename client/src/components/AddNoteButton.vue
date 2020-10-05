@@ -40,6 +40,7 @@ export default defineComponent({
       const userInput: string = getUserInput();
 
       if (!userInput) {
+        alert("Notes cannot be empty.");
         return;
       }
 
